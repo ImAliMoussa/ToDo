@@ -27,11 +27,13 @@ CONFIG += c++14
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    task.cpp
+    task.cpp \
+    view.cpp
 
 HEADERS += \
         mainwindow.h \
-    task.h
+    task.h \
+    view.h
 
 FORMS += \
         mainwindow.ui \

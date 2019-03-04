@@ -21,11 +21,16 @@ public:
     QString name() const;
     bool isCompleted() const;
 
+signals:
+    void taskRemoved(Task *task);
+    void statusChanged(Task *task);
+
 public slots:
     void renameTask();
 
-signals:
-    void taskRemoved(Task *task);
+private slots:
+    void check(bool checked);
+
 private:
     Ui::Task *ui;
 };

@@ -17,7 +17,7 @@
    <item>
     <widget class="QCheckBox" name="checkBox">
      <property name="text">
-      <string>Buy Milk</string>
+      <string/>
      </property>
     </widget>
    </item>
