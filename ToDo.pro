@@ -28,16 +28,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     task.cpp \
-    view.cpp
+    view.cpp \
+    taskinputdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     task.h \
-    view.h
+    view.h \
+    taskinputdialog.h
 
 FORMS += \
         mainwindow.ui \
-    task.ui
+    task.ui \
+    taskinputdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

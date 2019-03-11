@@ -5,7 +5,7 @@
 #include <QVector>
 #include <task.h>
 #include <view.h>
-
+#include <taskinputdialog.h>
 
 namespace Ui {
 class MainWindow;
