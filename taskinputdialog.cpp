@@ -25,14 +25,13 @@ TaskInputDialog::~TaskInputDialog()
 
 void TaskInputDialog::getInfo(QString *taskText,
                               int *priority,
-                              QFont *font,
                               bool *userPressedOk)
 {
     TaskInputDialog inputDialog;
     inputDialog.taskText = taskText;
-    inputDialog.font = font;
     inputDialog.priority = priority;
     inputDialog.userPressedOk = userPressedOk;
+    inputDialog.ui->taskLineEdit->setFocus();
     inputDialog.exec();
 }
 
@@ -41,7 +40,6 @@ void TaskInputDialog::taskAccepted()
     *userPressedOk = true;
     *taskText = ui->taskLineEdit->text();
     *priority = ui->priorityComboBox->currentIndex();
-    *font = ui->fontComboBox->currentFont();
 }
 
 void TaskInputDialog::taskRejected()

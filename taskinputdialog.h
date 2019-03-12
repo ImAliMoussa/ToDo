@@ -18,12 +18,10 @@ public:
 
     static void getInfo(QString *taskText,
                         int *priority,
-                        QFont *font,
                         bool *userPressedOk);
 private:
     Ui::TaskInputDialog *ui;
     int *priority;
-    QFont *font;
     QString *taskText;
     bool *userPressedOk;
 

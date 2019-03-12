@@ -81,13 +81,12 @@ void MainWindow::addTask(){
     bool userDidntPressCancel = false;
     int priority = -1;
     QString input;
-    QFont font;
-    TaskInputDialog::getInfo(&input, &priority, &font, &userDidntPressCancel);
+    TaskInputDialog::getInfo(&input, &priority, &userDidntPressCancel);
 
     if (userDidntPressCancel && !input.isEmpty()){
         qDebug() << "Adding a new task!";
 
-        Task *newTask = new Task(input);
+        Task *newTask = new Task(input, priority + 1);
         this->mTasks.append(newTask);
         this->view->tasksLayout->insertWidget(0,newTask);
 

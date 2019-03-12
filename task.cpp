@@ -3,10 +3,35 @@
 #include "task.h"
 #include "ui_task.h"
 
-Task::Task(const QString &name, QWidget *parent) :
+bool Task::statInitFlag = false;
+QPalette Task::redPal;
+QPalette Task::yellowPal;
+QPalette Task::greenPal;
+
+void Task::staticInit(){
+    Task::redPal = QPalette();
+    Task::yellowPal = QPalette();
+    Task::greenPal = QPalette();
+
+    Task::greenPal.setColor(QPalette::Foreground, Qt::green);
+    Task::greenPal.setColor(QPalette::ButtonText, Qt::green);
+
+    Task::redPal.setColor(QPalette::Foreground, Qt::red);
+    Task::redPal.setColor(QPalette::ButtonText, Qt::red);
+
+    Task::yellowPal.setColor(QPalette::Foreground, Qt::yellow);
+    Task::yellowPal.setColor(QPalette::ButtonText, Qt::yellow);
+
+    Task::statInitFlag = true;
+}
+
+Task::Task(const QString &name, int priority, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Task)
-{
+    ui(new Ui::Task){
+    if (statInitFlag == false){
+        staticInit();
+    }
+
     ui->setupUi(this);
     Task::setName(name);
 
@@ -15,10 +40,21 @@ Task::Task(const QString &name, QWidget *parent) :
         emit this->taskRemoved(this);
     });
     connect(ui->checkBox, &QCheckBox::toggled, this, &Task::check);
+    switch (priority) {
+        case 1:
+            this->setPalette(Task::greenPal);
+            break;
+        case 2:
+            this->setPalette(Task::yellowPal);
+            break;
+        case 3:
+            this->setPalette(Task::redPal);
+            break;
+    }
+    this->setAutoFillBackground(true);
 }
 
-Task::~Task()
-{
+Task::~Task(){
     delete ui;
 }
 

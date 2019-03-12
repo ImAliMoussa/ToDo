@@ -14,7 +14,7 @@ class Task : public QWidget
     Q_OBJECT
 
 public:
-    explicit Task(const QString& name, QWidget *parent = nullptr);
+    explicit Task(const QString& name, int priority, QWidget *parent = nullptr);
     ~Task();
 
     void setName(const QString &name);
@@ -31,8 +31,16 @@ public slots:
 private slots:
     void check(bool checked);
 
+public:
+    static bool statInitFlag;
+    static QPalette redPal;
+    static QPalette yellowPal;
+    static QPalette greenPal;
+    static void staticInit();
+
 private:
     Ui::Task *ui;
+    int priority;
 };
 
 #endif // TASK_H
