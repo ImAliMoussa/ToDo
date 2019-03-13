@@ -1,5 +1,5 @@
 # ToDo
-Prototype of a to-do list. Using c++ and Qt.
+Prototype of a to-do list. Using c++ build system, make and Qt installed.
 
 To run program make sure you have Qt installed.
 ```
