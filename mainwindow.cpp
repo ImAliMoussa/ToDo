@@ -53,40 +53,16 @@ void MainWindow::setView(View *view){
  *
 */
 
-//void MainWindow::addTask(){
-//    bool userDidntPressCancel;
-//    QString input = QInputDialog::getText(this,                     //parent
-//                                           tr("New Task"),          //window title
-//                                           tr("Task:"),             //label
-//                                           QLineEdit::Normal,
-//                                           tr("Untitled Task"),     //default string
-//                                           &userDidntPressCancel);
-
-//    if (userDidntPressCancel && !input.isEmpty()){
-//        qDebug() << "Adding a new task!";
-
-//        Task *newTask = new Task(input);
-//        this->mTasks.append(newTask);
-//        this->view->tasksLayout->insertWidget(0,newTask);
-
-//        connect(newTask, &Task::taskRemoved, this, &MainWindow::removeTask);
-//        connect(newTask, &Task::statusChanged,
-//                this, &MainWindow::taskStatusChanged);
-
-//        updateStatus();
-//    }
-//}
-
 void MainWindow::addTask(){
     bool userDidntPressCancel = false;
     int priority = -1;
-    QString input;
+    QString input = "";
     TaskInputDialog::getInfo(&input, &priority, &userDidntPressCancel);
 
     if (userDidntPressCancel && !input.isEmpty()){
         qDebug() << "Adding a new task!";
 
-        Task *newTask = new Task(input, priority + 1);
+        Task *newTask = new Task(input, priority);
         this->mTasks.append(newTask);
         this->view->tasksLayout->insertWidget(0,newTask);
 
@@ -97,7 +73,6 @@ void MainWindow::addTask(){
         updateStatus();
     }
 }
-
 
 void MainWindow::removeTask(Task *task){
     this->mTasks.removeOne(task);

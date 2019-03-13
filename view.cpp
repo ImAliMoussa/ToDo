@@ -1,8 +1,6 @@
 #include "view.h"
 
-View::View(QMainWindow *mainWindow)
-{
-
+View::View(QMainWindow *mainWindow){
     centralWidget = new QWidget(mainWindow);
     centralWidgetLayout = new QVBoxLayout(centralWidget);
 
@@ -21,7 +19,6 @@ View::View(QMainWindow *mainWindow)
     toolsWidget->setLayout(toolsLayout);
 
     tasksScrollArea = new QScrollArea(centralWidget);
-
 
     tasksWidget = new QWidget(tasksScrollArea);
     tasksLayout = new QVBoxLayout(tasksWidget);

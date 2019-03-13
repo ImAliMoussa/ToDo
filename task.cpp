@@ -1,13 +1,15 @@
 #include <QInputDialog>
 #include <QDebug>
 #include "task.h"
+#include "taskinputdialog.h"
 #include "ui_task.h"
 
-bool Task::statInitFlag = false;
+bool Task::statInitFlag = false; //static variables initialized yet?
 QPalette Task::redPal;
 QPalette Task::yellowPal;
 QPalette Task::greenPal;
 
+//static pallete variables initialized before constructor
 void Task::staticInit(){
     Task::redPal = QPalette();
     Task::yellowPal = QPalette();
@@ -40,17 +42,9 @@ Task::Task(const QString &name, int priority, QWidget *parent) :
         emit this->taskRemoved(this);
     });
     connect(ui->checkBox, &QCheckBox::toggled, this, &Task::check);
-    switch (priority) {
-        case 1:
-            this->setPalette(Task::greenPal);
-            break;
-        case 2:
-            this->setPalette(Task::yellowPal);
-            break;
-        case 3:
-            this->setPalette(Task::redPal);
-            break;
-    }
+
+    this->priority = priority;
+    this->setWidgetPriorityColors();
     this->setAutoFillBackground(true);
 }
 
@@ -71,21 +65,18 @@ bool Task::isCompleted() const{
 }
 
 void Task::renameTask(){
-    bool userDidntPressCancel;
-    QString prev = this->name().remove(0,1);
+    bool userDidntPressCancel = false;
+    QString input = this->name().remove(0,1);
+    int priority = this->priority;
+    //input variable initialized to previous input entered
     //weird bug makes name() return a '&' at start of string
 
-    QString input = QInputDialog::getText(this,                     //parent
-                                           tr("Edit task"),         //window title
-                                           tr("Task:"),             //label
-                                           QLineEdit::Normal,
-                                           prev,                    //default string
-                                           &userDidntPressCancel);
+    TaskInputDialog::getInfo(&input, &priority, &userDidntPressCancel);
 
-    if (userDidntPressCancel && !input.isEmpty()){
-        qDebug() << "Renamed task";
+    if (userDidntPressCancel){
         this->setName(input);
-        qDebug() << input;
+        this->priority = priority;
+        this->setWidgetPriorityColors();
     }
 }
 
@@ -94,4 +85,21 @@ void Task::check(bool checked){
     font.setStrikeOut(checked);
     ui->checkBox->setFont(font);
     emit this->statusChanged(this);
+}
+
+void Task::setWidgetPriorityColors(){
+    switch (this->priority) {
+        case 0:
+            this->setPalette(Task::greenPal);
+            break;
+        case 1:
+            this->setPalette(Task::yellowPal);
+            break;
+        case 2:
+            this->setPalette(Task::redPal);
+            break;
+        default:
+            qDebug() << "Priority out of range";
+            break;
+    }
 }

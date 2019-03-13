@@ -41,6 +41,7 @@ public:
 private:
     Ui::Task *ui;
     int priority;
+    void setWidgetPriorityColors();
 };
 
 #endif // TASK_H
