@@ -1,7 +1,7 @@
 # ToDo
-Prototype of a to-do list. Using c++ build system, make and Qt installed.
+Prototype of a to-do list. Using C++ and Qt.
 
-To run program make sure you have Qt installed.
+To run program make sure you have C++ build system, make and Qt installed.
 ```
 mkdir build
 cd build
